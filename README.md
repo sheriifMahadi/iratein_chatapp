@@ -10,7 +10,7 @@ Iratein Chatapp Built Using Django and React
     $ Python manage.py runserver
 
     - To create a superuser run the command: 
-        $ Python manage.py createsuperuser
+        ```$ Python manage.py createsuperuser```
 
 
 ## Setting up frontend
