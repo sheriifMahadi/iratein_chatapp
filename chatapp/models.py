@@ -43,3 +43,4 @@ class Message(models.Model):
  
     def __str__(self):
         return f"From {self.from_user.username} to {self.to_user.username}: {self.content} [{self.timestamp}]"
+

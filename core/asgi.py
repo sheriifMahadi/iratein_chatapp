@@ -1,23 +1,22 @@
 import os
-
-from channels.auth import AuthMiddlewareStack
-from channels.routing import ProtocolTypeRouter, URLRouter
-from channels.security.websocket import AllowedHostsOriginValidator
-from django.core.asgi import get_asgi_application
-
-from chatapp.routing import websocket_urlpatterns
-from chatapp.middleware import TokenAuthMiddleware  # noqa isort:skip
+from django.conf.urls import url
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
-# Initialize Django ASGI application early to ensure the AppRegistry
-# is populated before importing code that may import ORM models.
+
+
+from channels.routing import ProtocolTypeRouter, URLRouter
+from django.core.asgi import get_asgi_application
+
 django_asgi_app = get_asgi_application()
+
+from chatapp.middleware import TokenAuthMiddleware 
+import chatapp.routing
 
 
 application = ProtocolTypeRouter(
     {
         "http": django_asgi_app,
-        "websocket": TokenAuthMiddleware(URLRouter(websocket_urlpatterns))
+        "websocket": TokenAuthMiddleware(URLRouter(chatapp.routing.websocket_urlpatterns))
     }
 )
 
