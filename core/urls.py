@@ -13,6 +13,7 @@ urlpatterns = [
 ]
 
 urlpatterns += [
+    path("api/", include("core.api_router")),
     path("auth-token/", CustomObtainAuthTokenView.as_view()),
 ]
 

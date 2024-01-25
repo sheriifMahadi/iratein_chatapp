@@ -1,17 +1,12 @@
 import json
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import JsonWebsocketConsumer
-from .models import Message
+from .models import Message, Conversation
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
  
 class ChatConsumer(JsonWebsocketConsumer):
-    """
-    This consumer is used to show user's online status,
-    and send notifications.
-    """
- 
     def __init__(self, *args, **kwargs):
         super().__init__(args, kwargs)
         self.user = None
@@ -19,15 +14,15 @@ class ChatConsumer(JsonWebsocketConsumer):
         self.conversation = None
     
     def connect(self):
-       self.user = self.scope["user"]
-       if not self.user.is_authenticated:
+        self.user = self.scope["user"]
+        if not self.user.is_authenticated:
             return
-       self.accept()
-       
-       self.conversation_name = f"{self.scope['url_route']['kwargs']['conversation_name']}"
-       self.conversation, created = Conversation.objects.get_or_create(name=self.conversation_name)
-       
-       async_to_sync(self.channel_layer.group_add)(
+    
+        self.accept()
+        self.conversation_name = f"{self.scope['url_route']['kwargs']['conversation_name']}"
+        self.conversation, created = Conversation.objects.get_or_create(name=self.conversation_name)
+    
+        async_to_sync(self.channel_layer.group_add)(
             self.conversation_name,
             self.channel_name,
         )
