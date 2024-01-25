@@ -14,6 +14,7 @@ urlpatterns = [
 
 urlpatterns += [
     path("api/", include("core.api_router")),
+    path("auth-signup/", CustomObtainAuthTokenView.as_view()),
     path("auth-token/", CustomObtainAuthTokenView.as_view()),
 ]
 
