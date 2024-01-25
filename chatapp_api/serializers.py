@@ -13,7 +13,6 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ["username", "password"]
 
 
-
 class MessageSerializer(serializers.ModelSerializer):
     from_user = serializers.SerializerMethodField()
     to_user = serializers.SerializerMethodField()
