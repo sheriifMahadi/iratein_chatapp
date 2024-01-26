@@ -8,3 +8,4 @@ python manage.py migrate
 python manage.py makemigrations
 python manage.py migrate
 python manage.py createsu
+docker run --rm -p 6379:6379 redis:7
