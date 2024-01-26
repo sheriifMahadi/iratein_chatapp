@@ -17,5 +17,4 @@ EXPOSE 8000
 RUN chmod +x /code/build.sh
 
 RUN chmod +x /code/build.sh
-RUN docker run -p 6379:6379 -d redis:5
 ENTRYPOINT ["./build.sh"]

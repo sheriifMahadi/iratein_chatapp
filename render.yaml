@@ -6,13 +6,18 @@ services:
     startCommand: "./run-daphne.sh"
     repo: https://github.com/sheriifMahadi/iratein_chatapp.git
 
-  - redis:
-        container_name: redis
-        image: redis:5
-        restart: unless-stopped
-        ports:
-            - 6379:6379 
-  - django:
+  - type: redis:
+      container_name: redis
+      image: redis:5
+      restart: unless-stopped
+      healthcheck:
+        test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+        interval: 1s
+        timeout: 3s
+        retries: 5
+      ports:
+        - 6379:6379 
+  - type: django:
       depends_on:
         - postgres
         - redis
