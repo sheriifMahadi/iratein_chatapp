@@ -15,8 +15,7 @@ COPY . /code/
 EXPOSE 8000 
 
 RUN chmod +x /code/build.sh
-RUN chmod +x /code/deployment/start_app.sh
-RUN chmod +x /code/deployment/run_daphne.sh
+
 
 RUN chmod +x /code/start.sh
 ENTRYPOINT ["./build.sh"]

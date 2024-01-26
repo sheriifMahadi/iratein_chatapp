@@ -5,3 +5,10 @@ services:
     buildCommand: "./build.sh"
     startCommand: "./run-daphne.sh"
     repo: https://github.com/sheriifMahadi/iratein_chatapp.git
+
+  - redis:
+        container_name: redis
+        image: redis:5
+        restart: unless-stopped
+        ports:
+            - 6379:6379 
