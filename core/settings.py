@@ -140,13 +140,21 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:5173", 
+CSRF_TRUSTED_ORIGINS = [
+            "https://*",
+            "http://*",
+            "https://irateinchatapp-f.onrender.com",
+            "http://localhost:5173", 
 			"https://irateinchatapp.onrender.com",
-            "https://irateinchatapp-f.onrender.com"]
+            ]
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:5173", 
+CORS_ALLOWED_ORIGINS = [
+            "https://*",
+            "http://*",
+            "https://irateinchatapp-f.onrender.com",
+            "http://localhost:5173", 
 			"https://irateinchatapp.onrender.com",
-            "https://irateinchatapp-f.onrender.com"]
+            ]
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
