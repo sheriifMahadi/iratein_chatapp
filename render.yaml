@@ -1,7 +1,7 @@
 services:
   - type: web
     name: iratein_chatapp
-    env: python
+    runtime: python
     buildCommand: "./build.sh"
     startCommand: "./run-daphne.sh"
     repo: https://github.com/sheriifMahadi/iratein_chatapp.git
@@ -11,7 +11,7 @@ services:
       image: redis:5
       restart: unless-stopped
       healthcheck:
-        test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+        test: ["HEALTHCHECK CMD redis-cli ping || exit 1"]
         interval: 1s
         timeout: 3s
         retries: 5
@@ -19,5 +19,4 @@ services:
         - 6379:6379 
   - type: django:
       depends_on:
-        - postgres
         - redis
