@@ -14,5 +14,7 @@ RUN /iratein_env/bin/pip install -r requirements.txt
 COPY . /code/
 EXPOSE 8000 
 
+RUN docker container ls
+
 RUN chmod +x /code/build.sh
 ENTRYPOINT ["./build.sh"]
