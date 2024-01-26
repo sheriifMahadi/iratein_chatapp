@@ -13,3 +13,4 @@ python manage.py createsu
 
 python manage.py runserver 0.0.0.0:8000
 docker run -p 6379:6379 -d redis:5
+docker container ls
