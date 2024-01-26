@@ -16,6 +16,5 @@ EXPOSE 8000
 
 RUN chmod +x /code/build.sh
 
-
-RUN chmod +x /code/start.sh
+RUN chmod +x /code/build.sh
 ENTRYPOINT ["./build.sh"]
