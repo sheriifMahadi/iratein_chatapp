@@ -1,1 +1,1 @@
-daphne core.asgi:application --port=8000 --bind 0.0.0.0 -v2
+daphne -b -0.0.0.0 -p 8000 core.asgi:application 
