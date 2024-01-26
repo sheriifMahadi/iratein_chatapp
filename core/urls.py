@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from chatapp_api.views import CustomObtainAuthTokenView
+from chatapp_api.views import CustomObtainAuthTokenView, UserCreationView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -14,7 +14,7 @@ urlpatterns = [
 
 urlpatterns += [
     path("api/", include("core.api_router")),
-    # path("auth-signup/", CustomObtainAuthTokenView.as_view()),
+    path("auth-signup/", UserCreationView.as_view()),
     path("auth-token/", CustomObtainAuthTokenView.as_view()),
 ]
 

@@ -25,8 +25,8 @@ from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, UpdateMode
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.authtoken.views import ObtainAuthToken
-
-from .serializers import UserSerializer
+from rest_framework.views import APIView
+from .serializers import UserSerializer, RegisterUserSerializer
 
 from django.contrib.auth import get_user_model
 from rest_framework import status
@@ -36,19 +36,31 @@ from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, UpdateMode
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.permissions import AllowAny
 
 User = get_user_model()
 
 class CustomObtainAuthTokenView(ObtainAuthToken):
 
     def post(self, request, *args, **kwargs):
-        print(request.data)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data["user"]
         token, created = Token.objects.get_or_create(user=user)
         return Response({"token": token.key, "username": user.username})
 
+class UserCreationView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        print("xxx")
+        reg_serializer = RegisterUserSerializer(data=request.data)
+        print(reg_serializer.is_valid())
+        if reg_serializer.is_valid():
+            new_user = reg_serializer.save()
+            if new_user:
+                return Response(status=status.HTTP_201_CREATED)
+            return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ConversationViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
     serializer_class = ConversationSerializer
