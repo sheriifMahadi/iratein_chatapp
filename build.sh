@@ -11,5 +11,5 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py createsu
 
-docker run -p 6379:6379 -d redis:5
-docker container ls
+# docker run -p 6379:6379 -d redis:5
+# docker container ls
