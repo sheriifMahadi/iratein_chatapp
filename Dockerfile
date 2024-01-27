@@ -1,6 +1,6 @@
 FROM ubuntu:22.04
 
-DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y python3 python3-pip python3-venv vim-tiny vim-athena build-essential
+RUN apt-get update && apt-get install -y python3 python3-pip python3-venv DEBIAN_FRONTEND=noninteractive vim-tiny vim-athena build-essential
 
 
 ARG USER=root
