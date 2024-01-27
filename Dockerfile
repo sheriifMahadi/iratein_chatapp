@@ -18,6 +18,7 @@ EXPOSE 8000
 
 # ADD rootfs.tar.xz /
 # CMD ["/bin/sh"]
+CMD redis-server
 
 RUN chmod +x /code/build.sh
 ENTRYPOINT ["./build.sh"]
