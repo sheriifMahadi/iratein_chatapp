@@ -12,5 +12,3 @@ python manage.py migrate
 python manage.py createsu
 python manage.py runworker channel_layer -v2
 
-# docker run -p 6379:6379 -d redis:5
-# docker container ls
