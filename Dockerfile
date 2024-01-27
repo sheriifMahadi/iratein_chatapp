@@ -1,5 +1,6 @@
 FROM ubuntu:22.04
-RUN apt-get update && apt-get install -y python3 python3-pip python3-venv
+RUN apt-get update && apt-get install -y python3 python3-pip python3-venv vim-tiny vim-athena build-essential
+
 
 ARG USER=root
 USER $USER
@@ -14,8 +15,8 @@ RUN /iratein_env/bin/pip install -r requirements.txt
 COPY . /code/
 EXPOSE 8000 
 
-ADD rootfs.tar.xz /
-CMD ["/bin/sh"]
+# ADD rootfs.tar.xz /
+# CMD ["/bin/sh"]
 
 RUN chmod +x /code/build.sh
 ENTRYPOINT ["./build.sh"]
