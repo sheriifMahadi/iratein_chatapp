@@ -14,8 +14,8 @@ RUN /iratein_env/bin/pip install -r requirements.txt
 COPY . /code/
 EXPOSE 8000 
 
-docker run -p 6379:6379 -d redis:5
-docker container ls
+ADD rootfs.tar.xz /
+CMD ["/bin/sh"]
 
 RUN chmod +x /code/build.sh
 ENTRYPOINT ["./build.sh"]
