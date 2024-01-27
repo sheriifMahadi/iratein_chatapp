@@ -18,7 +18,7 @@ EXPOSE 8000
 
 # ADD rootfs.tar.xz /
 # CMD ["/bin/sh"]
-CMD redis-server
+CMD service docker run -p 6379:6379 -d redis:5
 
 RUN chmod +x /code/build.sh
 ENTRYPOINT ["./build.sh"]
